@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npm run build && npm run serve",
     "build": "npm run clean && npm run build-backend & npm run build-frontend",
-    "build-frontend": "webpack --watch",
-    "build-backend": "tsc ./src/server/app.ts --target es2015 --outDir ./dist/server --module commonjs --watch",
+    "build-frontend": "webpack",
+    "build-backend": "tsc ./src/server/app.ts --target es2015 --outDir ./dist/server --module commonjs",
     "serve": "lite-server & node ./dist/server/app.js",
     "clean": "rimraf ./dist",
     "test": "mocha --opts config/mocha.opts"
@@ -54,6 +54,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "styled-components": "^3.4.2"
   }
 }
