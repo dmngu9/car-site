@@ -8,7 +8,13 @@ export class CarController {
     }
 
     public static getByMakeName(req: Request, res: Response) {
-        // TODO: Please return all cars for the provided make, sorted by price
-        res.send('This has not been implemented yet');
+        const makeName = req.params.makeName;
+        const cars = 
+            CarService
+                .getAll()
+                .filter(car => car.makeName === makeName)
+                .sort((carA, carB) => carA.price - carB.price);
+                
+        res.status(200).json(cars);
     }
 }
