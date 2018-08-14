@@ -1,0 +1,11 @@
+{
+  "startPath": "/",
+  "port": 3000,
+  "server": {
+    "baseDir": "./dist/frontend",
+    "index": "index.html"
+  },
+  "browser": "default",
+  "notify": false,
+  "ghostMode": false
+}
