@@ -8,7 +8,7 @@ const app = express();
 
 routes.get('/makes', MakeController.getMakes);
 routes.get('/cars', CarController.getCars);
-routes.get('/cars/{makeName}', CarController.getByMakeName);
+routes.get('/cars/:makeName', CarController.getByMakeName);
 
 app.use(bodyParser.json());
 app.use(routes);

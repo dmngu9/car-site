@@ -12,9 +12,15 @@ export class CarController {
         const cars = 
             CarService
                 .getAll()
-                .filter(car => car.makeName === makeName)
-                .sort((carA, carB) => carA.price - carB.price);
-                
+                .filter(car => car.makeName.toLowerCase() === makeName.toLowerCase())
+                .sort((carA, carB) => {
+                    return carA.price - carB.price;
+                });
+        
+        if (cars.length === 0) {
+            res.sendStatus(404);
+            return;
+        }
         res.status(200).json(cars);
     }
 }
