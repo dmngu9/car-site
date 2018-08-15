@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import axios from 'axios';
 
 import { CarDetail } from './car-detail.component';
 
 interface CarListParameters {
-    makeName: string
+    makeName: string;
 }
 
 type Props = RouteComponentProps<CarListParameters>;
@@ -17,42 +18,50 @@ interface Car {
 }
 
 interface State {
-    cars?: Car[]; 
+    cars: Car[]; 
+    loading: boolean;
+    error?: string;
 }
 
 export class CarListComponent extends React.Component<Props, State> {
-    state: State = {};
+    state: State = {
+        cars: [],
+        loading: false
+    };
     
     componentDidMount() {
         this.fetchCars();
     } 
-    
-    componentDidUpdate(prevProps: Props) {
-        if (prevProps.match.params.makeName !== this.props.match.params.makeName) {
-            this.fetchCars();
-        }
-    }
 
     private fetchCars() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                this.setState({ cars: JSON.parse(xhttp.responseText) });
-            }
-        };
-
-        xhttp.open("GET", `//localhost:3010/cars/${this.props.match.params.makeName.toLowerCase()}`, true);
-        xhttp.send();
+        this.setState({ loading: true });
+        axios.get(`http://localhost:3010/cars/${this.props.match.params.makeName}`)
+            .then(res => {
+                this.setState({ cars: res.data, loading: false });
+            })
+            .catch(err => {
+                this.setState({ error: err.message, loading: false  });
+            });
     }
 
     public render() {
-        const { cars } = this.state;
+        const { cars, loading, error } = this.state;
+
+        if (!!error) {
+            return <div className="error">{ error }</div>
+        }
+
+        if (loading) {
+            return (
+                <div>Loading...</div>
+            );
+        }
 
         return (
-            <div className='car-list'>
+            <div className="car-list">
                 <h2>{this.props.match.params.makeName.toUpperCase()}</h2>
-                <div>
-                    {!!cars && cars.map(car => (
+                <div className="car-list__details">
+                    {cars.map(car => (
                         <CarDetail
                             key={car.id}
                             makeName={car.makeName}

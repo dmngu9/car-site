@@ -8,6 +8,10 @@ body {
   padding: 0;
 }
 
+p {
+  margin: 0;
+}
+
 h1 {
   background: #602121;
   color: #fff;
@@ -22,20 +26,30 @@ h1 span {
 }
 
 .content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   max-width: 800px;
   margin: auto;
   padding: 0 30px;
+  box-sizing: border-box;
 }
 
 h2 {
   margin-top: 0;
 }
 
+h3 {
+  margin: 0;
+}
+
 .make-list {
+  height: fit-content;
   border: 1px solid #333;
   border-radius: 5px;
   padding: 0 5px;
   background: #eee;
+  flex-basis: 25%;
 }
 
 .make-list a {
@@ -50,8 +64,12 @@ h2 {
   border-bottom: none;
 }
 
+.error {
+  color: red;
+}
+
 .car-detail {
-  padding: 8px 16px;
+  padding: 16px;
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 4px;
@@ -68,4 +86,15 @@ h2 {
 .car-detail__description--make {
   color: white;
   background-color: #602121;
+}
+
+.car-list {
+  flex-basis: 75%;
+}
+
+.car-list__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px 16px;
+  margin-right: 32px;
 }

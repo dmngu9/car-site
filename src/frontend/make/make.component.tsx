@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Make } from './make';
 
@@ -10,9 +9,9 @@ interface ComponentProps {
 export class MakeComponent extends React.Component<ComponentProps, {}> {
     public render() {
         return (
-            <Link to={'/cars/' + this.props.make.name.toLowerCase()}>
+            <a href={'/cars/' + this.props.make.name.toLowerCase()}>
                 {this.props.make.name}
-            </Link>
+            </a>
         );
     }
 }

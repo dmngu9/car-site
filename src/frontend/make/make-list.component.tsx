@@ -1,26 +1,33 @@
 import * as React from 'react';
-import {Make} from './make';
-import {MakeComponent} from './make.component';
+import axios from 'axios';
+
+import { Make } from './make';
+import { MakeComponent } from './make.component';
 
 interface ComponentState {
     makes: Make[];
     loading: boolean;
+    error?: string;
 }
 
 export class MakeListComponent extends React.Component<{}, ComponentState> {
-    constructor() {
-        super({});
+    state: ComponentState = {
+        makes: [],
+        loading: false
+    }
 
-        this.state = {
-            makes: [],
-            loading: true
-        };
-
+    componentDidMount() {
         this.getMakes();
     }
 
     public render() {
-        if (this.state.loading) {
+        const { makes, loading, error } = this.state;
+
+        if (!!error) {
+            return <div className="error">{ error }</div>
+        }
+
+        if (loading) {
             return (
                 <div>Loading...</div>
             );
@@ -28,23 +35,22 @@ export class MakeListComponent extends React.Component<{}, ComponentState> {
 
         return (
             <div className='make-list'>
-                {this.state.makes.map((make) => <MakeComponent make={make}/>)}
+                {makes.map((make) => <MakeComponent make={make}/>)}
             </div>
         );
     }
 
     private getMakes() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
+        this.setState({ loading: true });
+        axios.get('http://localhost:3010/makes')
+            .then(res => {
                 this.setState({
-                    makes: JSON.parse(xhttp.responseText),
+                    makes: res.data,
                     loading: false
-                })
-            }
-        };
-
-        xhttp.open("GET", "//localhost:3010/makes", true);
-        xhttp.send();
+                });
+            })
+            .catch(err => {
+                this.setState({ loading: false, error: err.message })
+            });
     }
 }
