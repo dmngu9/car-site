@@ -49,3 +49,23 @@ h2 {
 .make-list a:last-child {
   border-bottom: none;
 }
+
+.car-detail {
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.car-detail__description {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.car-detail__description--make {
+  color: white;
+  background-color: #602121;
+}

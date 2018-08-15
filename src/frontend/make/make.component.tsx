@@ -1,5 +1,7 @@
 import * as React from 'react';
-import {Make} from './make';
+import { Link } from 'react-router-dom';
+
+import { Make } from './make';
 
 interface ComponentProps {
     make: Make;
@@ -8,9 +10,9 @@ interface ComponentProps {
 export class MakeComponent extends React.Component<ComponentProps, {}> {
     public render() {
         return (
-            <a href={'/cars/' + this.props.make.name.toLowerCase()}>
+            <Link to={'/cars/' + this.props.make.name.toLowerCase()}>
                 {this.props.make.name}
-            </a>
+            </Link>
         );
     }
 }
