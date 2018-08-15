@@ -24,7 +24,7 @@ export class MakeListComponent extends React.Component<{}, ComponentState> {
         const { makes, loading, error } = this.state;
 
         if (!!error) {
-            return <div className="error">{ error }</div>
+            return <div className="make-list error">{ error }</div>
         }
 
         if (loading) {

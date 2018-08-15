@@ -48,12 +48,12 @@ export class CarListComponent extends React.Component<Props, State> {
         const { cars, loading, error } = this.state;
 
         if (!!error) {
-            return <div className="error">{ error }</div>
+            return <div className="car-list error">{ error }</div>
         }
 
         if (loading) {
             return (
-                <div>Loading...</div>
+                <div className="car-list">Loading...</div>
             );
         }
 

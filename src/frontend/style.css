@@ -39,7 +39,7 @@ h2 {
   margin-top: 0;
 }
 
-h3 {
+h4 {
   margin: 0;
 }
 
@@ -98,3 +98,21 @@ h3 {
   grid-gap: 16px 16px;
   margin-right: 32px;
 }
+
+@media only screen and (max-width: 600px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .make-list {
+    flex-basis: 0;
+    width: 100%;
+  }
+
+  .car-list {
+    flex-basis: 0;
+    width: 100%;
+    margin: 0 0 32px 0;
+  }
+};

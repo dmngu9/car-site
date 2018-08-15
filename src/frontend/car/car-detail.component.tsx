@@ -9,8 +9,8 @@ interface Props {
 const CarDetail: React.StatelessComponent<Props> = ({ makeName, modelName, price }) => (
     <div className="car-detail">
         <div className="car-detail__description">
-            <h3>{ modelName }</h3>
-            <h3 className="car-detail__description--make">{ makeName }</h3>
+            <h4>{ modelName }</h4>
+            <h4 className="car-detail__description--make">{ makeName }</h4>
         </div>
         <p>&#x24;{ price } drive away</p>
     </div>
